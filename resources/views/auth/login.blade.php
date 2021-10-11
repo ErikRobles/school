@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="{{asset('backend/images/favicon.ico')}}">
 
     <title>Lionsfield - Log in </title>
   
@@ -27,6 +27,8 @@
 				<div class="row justify-content-center no-gutters">
 					<div class="col-lg-4 col-md-5 col-12">
 						<div class="content-top-agile p-10">
+							<img style="width: 100px;" src="{{ asset('backend/images/logo.png') }}" alt="">
+
 							<h2 class="text-white">Sign In</h2>
 							<p class="text-white-50">Sign in to start your session</p>							
 						</div>

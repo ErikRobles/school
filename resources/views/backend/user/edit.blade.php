@@ -22,10 +22,9 @@
 								<h5>Select Role <span class="text-danger">*</span></h5>
 								<div class="controls">
 									<select name="role" id="role" required class="form-control">
-										<option value="{{ $editData->role }}" selected disabled>{{ $editData->role }}</option>
-										<option value="Admin">Admin</option>
-										<option value="Teacher">Teacher</option>
-										<option value="Student">Student</option>
+										<option value="" selected="" disabled="">Select Role</option>
+										<option value="Admin" {{ ($editData->role == "Admin" ? "selected" : "") }}>Admin</option>
+										<option value="Operator" {{ ($editData->role == "Operator" ? "selected" : "") }}>Operator</option>
 									</select>
 								</div>
 							</div>

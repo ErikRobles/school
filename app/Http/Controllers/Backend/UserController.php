@@ -9,8 +9,9 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     public function ViewUser () {
-        $users = User::all();
-        return view('backend.user.view', compact('users'));
+        // $users = User::all();
+        $data['allData'] = User::where('usertype','Admin')->get();
+        return view('backend.user.view',$data);
     }
 
     public function AddUser () {
@@ -23,10 +24,13 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
         ]);
         $data = new User();
+        $code = rand(0000,9999);
+        $data->usertype = 'Admin';
         $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password = bcrypt($request->role);
+        $data->password = bcrypt($code);
+        $data->code = $code;
         $data->save();
 
         $notification = array(
@@ -44,9 +48,9 @@ class UserController extends Controller
 
     public function UserUpdate(Request $request, $id) {
         $data = User::find($id);
-        $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->role = $request->role;
         $data->save();
 
         $notification = array(

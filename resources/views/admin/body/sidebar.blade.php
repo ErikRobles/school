@@ -28,6 +28,8 @@
           </a>
         </li>  
 		
+        @if(Auth::user()->role == 'Admin')
+
         <li class="treeview {{ ($prefix == '/users') ? 'active' : '' }}">
           <a href="#">
             <i data-feather="users"></i>
@@ -41,7 +43,8 @@
             <li><a href="{{ route('users.add')}}"><i class="ti-more"></i>Add User</a></li>
           </ul>
         </li> 
-		  
+        @endif
+
         <li class="treeview {{ ($prefix == '/profile') ? 'active' : '' }}">
           <a href="#">
             <i data-feather="user"></i> <span>Manage Profile</span>
@@ -74,6 +77,21 @@
             <li><a href="{{ route('assign.subject.view') }}"><i class="ti-more"></i>Asign Subject</a></li>
             <li><a href="{{ route('designation.view') }}"><i class="ti-more"></i>Designation</a></li>
 
+          </ul>
+        </li>
+
+        <li class="treeview {{ ($prefix == '/students') ? 'active' : '' }}">
+          <a href="#">
+            <i data-feather="compass"></i> <span>Student Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('student.registration.view') }}"><i class="ti-more"></i>Student Registration</a></li>
+            <li><a href="{{ route('roll.generate.view') }}"><i class="ti-more"></i>Roll Generator</a></li>
+            <li><a href="{{ route('registration.fee.view') }}"><i class="ti-more"></i>Registration Fee</a></li>
+            <li><a href="{{ route('monthly.fee.view') }}"><i class="ti-more"></i>Monthly Fee</a></li>
           </ul>
         </li>
 		

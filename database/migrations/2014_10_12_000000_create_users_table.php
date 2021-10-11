@@ -16,10 +16,24 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('role')->nullable();
-            $table->string('email')->unique();
+            $table->string('usertype')->comment('Student,Employee,Admin');
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('mobile')->nullable();
+            $table->string('address')->nullable();
+            $table->string('gender')->nullable();
+            $table->text('image')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('mname')->nullable();
+            $table->string('id_no')->nullable();;
+            $table->date('dob')->nullable();
+            $table->string('code')->nullable();;
+            $table->string('role')->comment('admin=head of software,operator,computer operator,user=employee')->nullable();
+            $table->date('join_date')->nullable();;
+            $table->integer('designation_id')->nullable();;
+            $table->double('salary')->nullable();;
+            $table->tinyinteger('status')->default(1)->comment('0=inactive,1=active');;
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

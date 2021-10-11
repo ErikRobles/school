@@ -21,18 +21,27 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Profile Photo</th>
+                                    <th>Code</th>
                                     <th>Created At</th>
                                     <th width="15%">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($users as $user)
+                            <tbody> 
+                                @foreach($allData as $key => $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img src="{{ (!empty($user->profile_photo_path)) ? url('/image/profile/' . $user->profile_photo_path) : url('/image/no_image.jpg') }}" class="img-circle text-center mb-2" alt="User Image" style="width: 75px; border-radius: 50%;"/></td>
+                                    <td>
+                                        <div style="text-align: center;width: 75px;height: 75px;position: relative;overflow: hidden;border-radius: 50%; border: 3px solid #bdd1f8;">
+                                            <img src="{{ (!empty($user->image)) ? url('/upload/user_images/' . $user->image) : url('/upload/no_image.jpg') }}" class="img-circle text-center mb-2" alt="User Image" style="display: inline;
+                                            margin: 0 auto;
+                                            height: 75px;
+                                            width: auto;"/>
+                                        </div>
+                                    </td>
+                                        <td>{{ $user->code }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-rounded btn-primary">Edit</a>
@@ -48,6 +57,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Profile Photo</th>
+                                    <th>Code</th>
                                     <th>Created At</th>
                                     <th width="15%">Action</th>
                                 </tr>

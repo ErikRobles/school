@@ -24,8 +24,7 @@
 									<select name="role" id="role" required class="form-control">
 										<option value="" selected disabled>Select Role</option>
 										<option value="Admin">Admin</option>
-										<option value="Teacher">Teacher</option>
-										<option value="Student">Student</option>
+										<option value="Operator">Operator</option>
 									</select>
 								</div>
 							</div>
@@ -53,11 +52,7 @@
                             </div>
                             {{-- End col 6 --}}
                             <div class="col-md-6">
-                                <div class="form-group">
-								<h5>Password <span class="text-danger">*</span></h5>
-								<div class="controls">
-									<input type="password" name="password" class="form-control" required> 
-                                </div>
+                                
 							</div>
                             {{-- End col 6 --}}
                         </div>
