@@ -18,6 +18,9 @@ use App\Http\Controllers\Backend\Student\StudentRegController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Student\StudentRollController;
+use App\Http\Controllers\Backend\Employee\EmployeeRegController;
+use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
+use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 
 /*
@@ -158,6 +161,23 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/exam/fee/view', [ExamFeeController::class, 'ExamFeeView'])->name('exam.fee.view');
         Route::get('/exam/fee/classwisedata', [ExamFeeController::class, 'ExamFeeClassData'])->name('student.exam.fee.classwise.get');
         Route::get('/exam/fee/payslip', [ExamFeeController::class, 'ExamFeePayslip'])->name('student.exam.fee.payslip');
-
     }); 
-});
+    Route::prefix('employees')->group(function() { 
+        // Employee Registration Routes
+        Route::get('/reg/employee/view', [EmployeeRegController::class, 'EmployeeView'])->name('employee.registration.view');
+        Route::get('/reg/employee/add', [EmployeeRegController::class, 'EmployeeAdd'])->name('employee.registration.add');
+        Route::post('/reg/employee/store', [EmployeeRegController::class, 'EmployeeStore'])->name('store.employee.registration');
+        Route::get('/reg/employee/edit/{id}', [EmployeeRegController::class, 'EmployeeEdit'])->name('employee.registration.edit');
+        Route::post('/reg/employee/update/{id}', [EmployeeRegController::class, 'EmployeeUpdate'])->name('update.employee.registration');
+        Route::get('/reg/employee/details/{id}', [EmployeeRegController::class, 'EmployeeDetails'])->name('employee.registration.details');
+        // Employee salary
+        Route::get('/salary/employee/view', [EmployeeSalaryController::class, 'EmployeeSalaryView'])->name('employee.salary.view');
+        Route::get('/salary/employee/increment/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryIncrement'])->name('employee.salary.increment');
+        Route::post('/update/increment/store/{id}', [EmployeeSalaryController::class, 'EmployeeUpdateIncrement'])->name('update.increment.store');
+        Route::get('/salary/employee/details/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryDetails'])->name('employee.salary.details');
+        // Employee Leave routes
+        Route::get('/leave/employee/view', [EmployeeLeaveController::class, 'EmployeeLeaveView'])->name('employee.leave.view');
+        Route::get('/leave/employee/add', [EmployeeLeaveController::class, 'EmployeeLeaveAdd'])->name('employee.leave.add');
+
+    });
+}); // End Middleware Auth Route
