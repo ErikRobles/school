@@ -35,8 +35,8 @@
                                     <td>{{$leave->start_date }}</td>
                                     <td>{{ $leave->end_date }}</td>
                                     <td>
-                                        <a href="{{ route('designation.edit', $leave->id) }}" class="btn btn-rounded btn-primary">Edit</a>
-                                        <a href="{{ route('designation.delete', $leave->id) }}" class="btn btn-rounded btn-danger" id="delete">Delete</a>
+                                        <a href="{{ route('employee.leave.edit', $leave->id) }}" class="btn btn-rounded btn-primary">Edit</a>
+                                        <a href="{{ route('employee.leave.delete', $leave->id) }}" class="btn btn-rounded btn-danger" id="delete">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

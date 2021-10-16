@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\FeeAmountController;
 use App\Http\Controllers\Backend\Student\ExamFeeController;
@@ -22,6 +24,8 @@ use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
+use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\Backend\Employee\EmployeeMonthlySalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +182,31 @@ Route::group(['middleware' => 'auth'], function() {
         // Employee Leave routes
         Route::get('/leave/employee/view', [EmployeeLeaveController::class, 'EmployeeLeaveView'])->name('employee.leave.view');
         Route::get('/leave/employee/add', [EmployeeLeaveController::class, 'EmployeeLeaveAdd'])->name('employee.leave.add');
+        Route::post('/leave/employee/store', [EmployeeLeaveController::class, 'EmployeeLeaveStore'])->name('store.employee.leave');
+        Route::get('/leave/employee/edit/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveEdit'])->name('employee.leave.edit');
+        Route::post('/leave/employee/update/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveUpdate'])->name('update.employee.leave');
+        Route::get('/leave/employee/delete/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveDelete'])->name('employee.leave.delete');
+        // Employee Attendance Routes
+        Route::get('/attendance/employee/view', [EmployeeAttendanceController::class, 'EmployeeAttendanceView'])->name('employee.attendance.view');
+        Route::get('/attendance/employee/add', [EmployeeAttendanceController::class, 'EmployeeAttendanceAdd'])->name('employee.attendance.add');
+        Route::post('/attendance/employee/store', [EmployeeAttendanceController::class, 'EmployeeAttendanceStore'])->name('store.employee.attendance');
+        Route::get('/attendance/employee/edit/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceEdit'])->name('employee.attendance.edit');
+        Route::get('/attendance/employee/details/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceDetails'])->name('employee.attendance.details');
+        // Employee Monthly Salary Routes
+        Route::get('/monthly/salary/employee/view', [EmployeeMonthlySalaryController::class, 'EmployeeMonthlySalaryView'])->name('employee.monthly.salary.view');
+        Route::get('/monthly/salary/employee/get', [EmployeeMonthlySalaryController::class, 'EmployeeMonthlySalaryGet'])->name('employee.monthly.salary.get');
+        Route::get('/employee/monthly/salary/payslip/{employee_id}', [EmployeeMonthlySalaryController::class, 'EmployeeMonthlySalaryPayslip'])->name('employee.monthly.salary.payslip');
+    });
+    Route::prefix('marks')->group(function() { 
+        // User Management
+        Route::get('/marks/entry/add', [MarksController::class, 'MarksEntryAdd'])->name('marks.entry.add');
+        Route::post('/marks/entry/store', [MarksController::class, 'MarksEntryStore'])->name('marks.entry.store');
+        Route::get('/marks/entry/edit', [MarksController::class, 'MarksEdit'])->name('marks.entry.edit');
+        Route::get('/marks/getstudents/edit', [MarksController::class, 'MarksEditGetStudents'])->name('student.edit.getstudents');
+        Route::post('marks/entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');  
 
     });
+    Route::get('/marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
+    Route::get('/student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
+
 }); // End Middleware Auth Route
